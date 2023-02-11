@@ -15,7 +15,7 @@ export class AuthController{
             const user = await this.authService.signup(email,password)
             if(user){
                 const access_token = await JWT.Sign(2,{user:user.id});
-                res.attachRefreshToken();
+                await res.attachRefreshToken();
                 res.status(200).json({access_token, user});
             }else{
                 throw new Error('User not created')
@@ -32,7 +32,7 @@ export class AuthController{
             const user = await this.authService.signup(email,password)
             if(user){
                 const access_token = await JWT.Sign(2,{user:user.id});
-                res.attachRefreshToken();
+                await res.attachRefreshToken();
                 res.status(200).json({access_token, user});
             }else{
                 res.status(401).json({success:false});
